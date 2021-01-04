@@ -44,3 +44,7 @@ a, a:hover {
   -moz-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
 }
+
+ul, li {
+  list-style: none;
+}

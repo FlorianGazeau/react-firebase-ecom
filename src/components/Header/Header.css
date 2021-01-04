@@ -13,16 +13,27 @@
 
 .logo {
   width: 10rem;
-  position: absolute;
-  top: 50%; left: 10px;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  transform: translateY(-50%);
 }
 
 .logo img {
   display: block;
   width: 100%;
   margin: 0;
+}
+
+.nav {
+  padding: 0 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu i {
+  color: black;
 }
 

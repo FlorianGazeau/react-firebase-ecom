@@ -1,0 +1,25 @@
+.registration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registration-content {
+  margin: 10px;
+  width: 500px;
+}
+
+.registration-header {
+  display: flex;
+}
+
+.registration-header h4 {
+  flex: 1;
+  text-align: center;
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.registration-header h4:nth-child(2) {
+  border-left: none;
+}
