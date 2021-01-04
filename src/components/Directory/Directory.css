@@ -1,0 +1,33 @@
+.directory {
+  display: flex;
+  flex-direction: column;
+  height: calc(100%);
+}
+
+.directory-item {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid black; */
+}
+
+.btn {
+  background: white;
+  padding: 10px;
+  color: black;
+  border: 1px solid black;
+}
+
+.btn-hero {
+  font-weight: 300;
+}
+
+
+@media screen and (min-width: 800px) {
+  .directory {
+    flex-direction: row;
+  }
+}
