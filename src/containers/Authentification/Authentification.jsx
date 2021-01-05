@@ -3,10 +3,10 @@ import Button from '../../components/Form/Button/Button'
 import SignIn from '../../components/SignIn/SignIn'
 import SignUp from '../../components/SignUp/SignUp'
 import { signInWithGoogle } from '../../Firebase/utils'
-import './Registration.css'
+import './Authentification.css'
 
 
-const Registration = props => {
+const Authentification = props => {
 
   const [toggle, setToggle] = useState('signin')
 
@@ -34,4 +34,4 @@ const Registration = props => {
   )
 }
 
-export default Registration
+export default Authentification

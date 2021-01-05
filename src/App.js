@@ -4,8 +4,9 @@ import { auth, handleUserProfile } from './Firebase/utils'
 // Pages
 import Header from "./components/Header/Header";
 import Homepage from "./containers/Homepage/Homepage";
-import Registration from "./containers/Registration/Registration";
+import Authentification from "./containers/Authentification/Authentification";
 import { Component } from 'react';
+import Recovery from './containers/Recovery/Recovery';
 
 const initialState = {
   currentUser: null
@@ -51,8 +52,9 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={Homepage} />
           <Route path='/account/login'>
-            {currentUser ? <Redirect to ='/'></Redirect> : <Registration />}
+            {currentUser ? <Redirect to ='/'></Redirect> : <Authentification />}
           </Route>
+          <Route path='/account/recovery' component={Recovery} />
         </Switch>
       </Router>
     );

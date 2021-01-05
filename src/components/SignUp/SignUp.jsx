@@ -4,6 +4,7 @@ import { auth } from '../../Firebase/utils'
 import Form from '../Form/Form/Form'
 import Button from '../Form/Button/Button'
 import { FormInput } from '../Form/FormInput/FormInput'
+import { Link } from 'react-router-dom'
 
 const initialSate = {
   email: '',
@@ -47,6 +48,7 @@ class SignUp extends Component {
     const { email, password, errors } = this.state
 
     return (
+      <>
       <Form onSubmit={this.handleSubmit}>
         <FormInput 
           type='email'
@@ -66,6 +68,8 @@ class SignUp extends Component {
           Sign up
         </Button>
       </Form>
+      <Link to='/account/recovery'>Forget Password ?</Link>
+      </>
     )
   }
 }
