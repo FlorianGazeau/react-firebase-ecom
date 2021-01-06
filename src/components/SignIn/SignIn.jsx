@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 import { auth, handleUserProfile } from '../../Firebase/utils'
 
@@ -6,45 +6,27 @@ import Form from '../Form/Form/Form'
 import {FormInput} from '../Form/FormInput/FormInput'
 import Button from '../Form/Button/Button'
 
+const SignIn = () => {
 
-const initialSate = {
-  displayName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  errors: ''
-}
+  const [displayName, setDisplayName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState([])
 
-class SignIn extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      ...initialSate
-    }
-
-    this.handleChange = this.handleChange.bind(this)
+  const resetForm = () => {
+    setDisplayName('')
+    setEmail('')
+    setPassword('')
+    setConfirmPassword('')
+    setError([])
   }
 
-  handleChange (e) {
-    const { name, value } = e.target
-
-    this.setState({
-      [name]: value
-    })
-  }
-
-  handleSubmit = async event => {
+  const handleSubmit = async event => {
     event.preventDefault()
 
-    const { displayName, email, password, confirmPassword, errors} = this.state
-
     if (password !== confirmPassword) {
-      const err = ['Password Don\'t match']
-      this.setState({
-        errors: err
-      })
-      return
+      return setError("Password don't match")
     }
 
     try {
@@ -52,74 +34,66 @@ class SignIn extends Component {
       const { user } = await auth.createUserWithEmailAndPassword(email, password)
       await handleUserProfile(user, { displayName})
 
-      this.setState({
-        ...initialSate
-      })
-
+      resetForm()
     } catch(err) {
       console.log(err)
     }
   }
 
-  render () {
+  return (
+    <Form action="" onSubmit={handleSubmit}>
 
-    const { displayName, email, password, confirmPassword, errors } = this.state
+      {error.length > 0 && 
+        <ul>
+          {error.map((err, index) => {
+            return (
+              <li key={index}>{err}</li>
+            )
+          })}
+        </ul>
+      }
 
-    return (
-      <Form action="" onSubmit={this.handleSubmit}>
-
-        {errors.length > 0 && 
-          <ul>
-            {errors.map((err, index) => {
-              return (
-                <li key={index}>{err}</li>
-              )
-            })}
-          </ul>
-        }
-
-        <FormInput
-          type='text'
-          name="displayName" 
-          value={displayName}
-          placeholder="Full Name"
-          className="input form-field"
-          required
-          handleChange={this.handleChange}
-        />
-        <FormInput
-          type='email'
-          name="email" 
-          value={email}
-          placeholder="Your Email"
-          className="input form-field"
-          required
-          handleChange={this.handleChange}
-        />
-        <FormInput
-          type='password'
-          name="password" 
-          value={password}
-          placeholder="Your Password"
-          className="input form-field"
-          required
-          onChange={this.handleChange}
-        />
-        <FormInput
-          type='password'
-          name="confirmPassword" 
-          value={confirmPassword}
-          placeholder="Confirm your password"
-          className="input form-field"
-          required
-          onChange={this.handleChange}
-        />
-        <Button className='btn' type='submit'>
-          Sign In
-        </Button>
-      </Form>
-    )
-  }
+      <FormInput
+        type='text'
+        name="displayName" 
+        value={displayName}
+        placeholder="Full Name"
+        className="input form-field"
+        required
+        handleChange={(e) => setDisplayName(e.target.value)}
+      />
+      <FormInput
+        type='email'
+        name="email" 
+        value={email}
+        placeholder="Your Email"
+        className="input form-field"
+        required
+        handleChange={(e) => setEmail(e.target.value)}
+      />
+      <FormInput
+        type='password'
+        name="password" 
+        value={password}
+        placeholder="Your Password"
+        className="input form-field"
+        required
+        handleChange={(e) => setPassword(e.target.value)}
+      />
+      <FormInput
+        type='password'
+        name="confirmPassword" 
+        value={confirmPassword}
+        placeholder="Confirm your password"
+        className="input form-field"
+        required
+        handleChange={(e) => setConfirmPassword(e.target.value)}
+      />
+      <Button className='btn' type='submit'>
+        Sign In
+      </Button>
+    </Form>
+  )
 }
 
 export default SignIn

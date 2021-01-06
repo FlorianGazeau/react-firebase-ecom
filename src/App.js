@@ -1,7 +1,11 @@
-import { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import { setCurrentUser } from './redux/Users/user.actions'
+
+// hoc
+
+import WithAuth from './hoc/WithAuth'
 
 // Firebase
 import { auth, handleUserProfile } from './Firebase/utils'
@@ -13,15 +17,14 @@ import Header from "./components/Header/Header";
 import Homepage from "./pages/Homepage/Homepage";
 import Authentification from "./pages/Authentification/Authentification";
 import Recovery from './pages/Recovery/Recovery';
+import Dashboard from './pages/Dashboard/Dashboard'
 
-class App extends Component {
+const App = props => {
+  const { setCurrentUser, currentUser } = props
 
-  authListener = null
+  useEffect(() => {
 
-  componentDidMount() {
-    const { setCurrentUser } = this.props
-
-    this.authLister = auth.onAuthStateChanged(async userAuth => {
+    const authListener = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await handleUserProfile(userAuth)
         userRef.onSnapshot(snapshot => {
@@ -33,28 +36,28 @@ class App extends Component {
       }
       setCurrentUser(userAuth)
     })
-  }
 
-  componentWillUnmount() {
-    this.authListener()
-  }
+    return() => {
+      authListener()
+    }
+  }, [])
 
-  render() {
-    const { currentUser} = this.props
-    console.log(currentUser)
-    return (
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={Homepage} />
-          <Route path='/account/login'>
-            {currentUser ? <Redirect to ='/'></Redirect> : <Authentification />}
-          </Route>
-          <Route path='/account/recovery' component={Recovery} />
-        </Switch>
-      </Router>
-    );
-  }
+  return (
+    <Router>
+      <Header />
+      <Switch>
+        <Route exact path='/' component={Homepage} />
+        <Route path='/account/login'>
+          {currentUser ? <Redirect to ='/'></Redirect> : <Authentification />}
+        </Route>
+        <Route path='/account/recovery' component={Recovery} />
+        <WithAuth>
+          <Route path='/account/' component={Dashboard} />
+        </WithAuth>
+        <Route path='/test'></Route>
+      </Switch>
+    </Router>
+  );
 }
 
 const mapStateToProps = ({ user }) => ({

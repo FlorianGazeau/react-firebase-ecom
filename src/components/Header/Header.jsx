@@ -19,15 +19,25 @@ function Header(props) {
             </Link>
           </div>
           <ul className='menu'>
-            <li>
-              <Link to='/account/login'>
-                <i className="fas fa-user-circle fa-lg" />
-              </Link>
-            </li>
-            {(currentUser && 
+
+            {(!currentUser && 
               <li>
-                <i class="fas fa-sign-out-alt fa-lg" onClick={() => auth.signOut()}></i>
-              </li>)}
+                <Link to='/account/login'>
+                  <i className="fas fa-user-circle fa-lg" />
+                </Link>
+              </li>
+            )}
+            {(currentUser && 
+              <>
+                <li>
+                  <Link to='/account'>
+                    <i className="fas fa-user-circle fa-lg" />
+                  </Link>
+                </li>
+                <li>
+                  <i className="fas fa-sign-out-alt fa-lg" onClick={() => auth.signOut()}></i>
+                </li>
+              </>)}
           </ul>
         </div>
       </div>
