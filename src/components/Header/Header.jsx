@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './Header.css'
-import Logo from '../../assets/logo.png'
+import { connect } from 'react-redux'
 import { auth } from '../../Firebase/utils'
+import Logo from '../../assets/logo.png'
 
-export default function Header(props) {
+import './Header.css'
+
+function Header(props) {
 
   const {currentUser} = props
   return (
@@ -36,3 +38,9 @@ export default function Header(props) {
 Header.defaultProps = {
   currentUser: null
 }
+
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
+
+export default connect(mapStateToProps, null)(Header)
