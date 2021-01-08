@@ -1,0 +1,12 @@
+.toolbar {
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25em;
+}
+
+.toolbar a {
+ color: white;
+ font-size: 0.7em;
+}

@@ -5,6 +5,8 @@ import { auth } from '../../Firebase/utils'
 import Logo from '../../assets/logo.png'
 
 import './Header.css'
+import Toolbar from '../Toolbar/Toolbar'
+import { CheckAdminUser } from '../../utils/CheckAdminUser'
 
 const MapState = ({user }) => ({
   currentUser: user.currentUser
@@ -15,6 +17,8 @@ function Header() {
   const { currentUser } = useSelector(MapState)
 
   return (
+    <>
+    {currentUser && CheckAdminUser(currentUser) ? <Toolbar /> : ''}
     <header className="header">
       <div className="wrap">
         <div className='nav'>
@@ -35,7 +39,7 @@ function Header() {
             {(currentUser && 
               <>
                 <li>
-                  <Link to='/account'>
+                  <Link to='/account/profil'>
                     <i className="fas fa-user-circle fa-lg" />
                   </Link>
                 </li>
@@ -47,6 +51,7 @@ function Header() {
         </div>
       </div>
     </header>
+    </>
   )
 }
 

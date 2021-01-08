@@ -29,6 +29,7 @@ export const signUpUser = ({ displayName, email, password, confirmPassword, erro
       })
     }
     const { user } = await auth.createUserWithEmailAndPassword(email, password)
+    console.log('herrreeee')
     await handleUserProfile(user, { displayName})
 
     dispatch({

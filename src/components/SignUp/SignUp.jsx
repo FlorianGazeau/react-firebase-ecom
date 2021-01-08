@@ -42,6 +42,7 @@ const Signup = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    console.log('fucking')
 
     dispatch(signUpUser({ displayName, email, password }))
   }

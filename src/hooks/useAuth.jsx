@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const mapSate = ({user}) => ({
   currentUser: user.currentUser
