@@ -1,0 +1,30 @@
+.card {
+  width: 350px;
+  border: 1px solid black;
+  margin: 0.5em 0.5em;
+}
+
+.card-content {
+  display: flex;
+  /* padding: 10px; */
+}
+
+.card-thumbnail {
+  width: 150px;
+}
+
+.card-thumbnail img {
+  width: 100%;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.card-title {
+  font-size: 1.3em;
+}

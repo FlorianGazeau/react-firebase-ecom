@@ -48,3 +48,12 @@ a, a:hover {
 ul, li {
   list-style: none;
 }
+
+h4 {
+  margin: 0;
+}
+
+.container {
+  max-width: 1450px;
+  margin: 0 auto;
+}

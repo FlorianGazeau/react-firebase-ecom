@@ -19,7 +19,7 @@ export const signInUser = ({ email, password }) => async dispatch => {
   }
 }
 
-export const signUpUser = ({ displayName, email, password, confirmPassword, error }) => async dispatch => {
+export const signUpUser = ({ displayName, email, password, confirmPassword }) => async dispatch => {
   try {
     if (password !== confirmPassword) {
       const err = "Password don't match"
@@ -42,7 +42,7 @@ export const signUpUser = ({ displayName, email, password, confirmPassword, erro
   }
 }
 
-export const resetPassword = ({ email, error }) => async dispatch => {
+export const resetPassword = ({ email }) => async dispatch => {
   const config = {
     url: 'http://localhost:3000/account/login'
   }

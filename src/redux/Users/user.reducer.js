@@ -1,4 +1,3 @@
-import { resetPassword } from './user.actions'
 import userTypes from  './user.types'
 
 const INITIAL_STATE = {
