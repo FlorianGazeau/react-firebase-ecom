@@ -20,6 +20,7 @@ import Recovery from './pages/Recovery/Recovery';
 import Dashboard from './pages/Dashboard/Dashboard'
 import Admin from './pages/Admin/Admin';
 import { CheckAdminUser } from './utils/CheckAdminUser';
+import Search from './pages/Search/Search';
 
 const App = props => {
   const { setCurrentUser, currentUser } = props
@@ -49,6 +50,7 @@ const App = props => {
       <Header />
       <Switch>
         <Route exact path='/' component={Homepage} />
+        <Route path='/search' component={Search} />
         <Route path='/account/login'>
           {currentUser ? <Redirect to ='/'></Redirect> : <Authentification />}
         </Route>
