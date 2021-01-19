@@ -31,14 +31,19 @@ export const addNewProductSuccess = (product) => ({
 })
 
 
-export function fetchProducts() {
+export function fetchProducts({ filterType }) {
 
   return dispatch => { 
     dispatch(fetchProductsBegin)
 
     return new Promise((resolve, reject) => {
-      firestore
-        .collection('products')
+
+      let ref = firestore.collection('products').orderBy('createDate')
+
+      if (filterType) {
+        ref = ref.where('category', '==', filterType)
+      } 
+        ref
         .get()
         .then(snapshot => {
           const productsArray = snapshot.docs.map(doc => {
@@ -57,8 +62,9 @@ export function fetchProducts() {
   }
 }
 
-export const fetchProductsBegin = () => ({
-  type: productsTypes.FETCH_PRODUCTS_BEGIN
+export const fetchProductsBegin = (filters={}) => ({
+  type: productsTypes.FETCH_PRODUCTS_BEGIN,
+  payload: filters
 })
 
 export const fetchProductsSuccess = products => ({

@@ -27,6 +27,12 @@ function Header() {
               <img src={Logo} alt="Logo Trasher"/>
             </Link>
           </div>
+          <div className=''>
+            <ul>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='/search'>Search</Link></li>
+            </ul>
+          </div>
           <ul className='menu'>
 
             {(!currentUser && 

@@ -22,10 +22,11 @@ const Admin = () => {
   const [img, setImg] = useState('');
   const [price, setPrice] = useState(0);
   const [test, setTest] = useState(0)
+  const [filterType, setFilterType] = useState([])
 
   useEffect(() => {
-    dispatch(fetchProducts())
-  }, [product]);
+    dispatch(fetchProducts(filterType))
+  }, [product, filterType]);
 
   function handleModal() {
     setShow(true)
@@ -34,8 +35,10 @@ const Admin = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    const createDate = new Date()
+
     dispatch(addNewProduct({
-      category, name, img, price
+      category, name, img, price, createDate
     }))
   }
 

@@ -50,6 +50,7 @@ const App = props => {
       <Header />
       <Switch>
         <Route exact path='/' component={Homepage} />
+        <Route exact path='/search' component={Search} />
         <Route path='/search' component={Search} />
         <Route path='/account/login'>
           {currentUser ? <Redirect to ='/'></Redirect> : <Authentification />}
