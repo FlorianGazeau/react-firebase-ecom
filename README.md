@@ -4,7 +4,7 @@ A simple Ecommerce application where I wanted to reproduce some features of e-co
 
 ## Demo
 
-You can access the demo of the site [here](#https://react-firebase-ecomapp.netlify.app/).
+You can access the demo of the site [here](https://react-firebase-ecomapp.netlify.app/).
 
 ## Built With
 
