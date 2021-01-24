@@ -31,29 +31,38 @@ export const addNewProductSuccess = (product) => ({
 })
 
 
-export function fetchProducts({ filterType }) {
+export function fetchProducts({ filterType, startAfterDoc, persitProducts=[] }) {
 
   return dispatch => { 
     dispatch(fetchProductsBegin)
 
     return new Promise((resolve, reject) => {
 
-      let ref = firestore.collection('products').orderBy('createDate')
+      const pageSize = 6
+      let ref = firestore.collection('products').orderBy('createDate').limit(pageSize)
 
-      if (filterType) {
-        ref = ref.where('category', '==', filterType)
-      } 
+      if (filterType) { ref = ref.where('category', '==', filterType) }
+      if (startAfterDoc) { ref = ref.startAfter(startAfterDoc) }
         ref
         .get()
         .then(snapshot => {
-          const productsArray = snapshot.docs.map(doc => {
-            return {
-              ...doc.data(),
-              documentID: doc.id
-            }
+          const totalCount = snapshot.size
+
+          const data = [
+            ...persitProducts,
+            ...snapshot.docs.map(doc => {
+              return {
+                ...doc.data(),
+                documentID: doc.id
+              }
+            })
+          ]
+          resolve({
+            data,
+            queryDoc: snapshot.docs[totalCount - 1],
+            isLast: totalCount < 1
           })
-          resolve(productsArray)
-          dispatch(fetchProductsSuccess(productsArray))
+          dispatch(fetchProductsSuccess({data, queryDoc: snapshot.docs[totalCount - 1]}))
         })
         .catch((err) => {
           reject(err)
@@ -67,9 +76,9 @@ export const fetchProductsBegin = (filters={}) => ({
   payload: filters
 })
 
-export const fetchProductsSuccess = products => ({
+export const fetchProductsSuccess = data => ({
   type: productsTypes.FETCH_PRODUCTS_SUCCESS,
-  payload: { products }
+  payload: { data }
 });
 
 export const fetchProductsError = () => ({
@@ -106,3 +115,34 @@ export const deleteProductSuccess = (documentID) => ({
   type: productsTypes.DELETE_PRODUCTS_SUCCESS,
   payload: documentID
 })
+
+export const fetchProduct = ({productID}) => {
+  // console.log('here')
+  // console.log(productID)
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      firestore
+      .collection('products')
+      .doc(productID)
+      .get()
+      .then(snapshot => {
+        console.log('hereeee')
+        console.log(snapshot.data())
+        // console.log(snapshot)
+        if (snapshot.exist) {
+          resolve(
+            snapshot.data()
+            )
+            console.log('here')
+          dispatch({
+            type: productsTypes.FETCH_PRODUCT,
+            payload: snapshot.data
+          })
+        }
+      })
+      .catch((err) => {
+        reject(err)
+      })
+    })
+  }
+}

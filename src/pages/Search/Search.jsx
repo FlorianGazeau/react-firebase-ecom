@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
 import CardProduct from '../../components/CardProduct/CardProduct';
+import LoadMore from '../../components/LoadMore/LoadMore';
 import { fetchProducts } from '../../redux/Products/products.actions';
 
 const MapState = ({productsData}) => ({
@@ -11,20 +11,35 @@ const MapState = ({productsData}) => ({
 const Search = () => {
 
   const dispatch = useDispatch()
-  const { products } = useSelector(MapState)
   const [filterType, setFilterType] = useState('');
-
+  const { products } = useSelector(MapState)
+  const { data, queryDoc } = products
+  
   useEffect(() => {
     dispatch(fetchProducts({ filterType }))
-    console.log(products)
   }, [filterType]);
-
+  
   const handleFilter = (e) => {
     const nextFilter = e.target.value
     setFilterType(nextFilter)
   }
+  
+  const handleLoadMore = () => {
+    console.log(queryDoc)
+    dispatch(
+      fetchProducts({ 
+        filterType, 
+        startAfterDoc: queryDoc,
+        persitProducts: data   
+      })
+    )
+  }
 
-  if (products.length < 1) {
+  const configLoadMore = {
+    onLoadMoreEvt: handleLoadMore,
+  }
+
+  if (data && data.length < 1) {
     return (
       <div className='searchPage'>
         <div>
@@ -49,20 +64,24 @@ const Search = () => {
           <option value="womens">Womens</option>
         </select>
       </div>
+      <div className='result'>
+        {data && data.map((data, i) => {
+          const { img, price, name, documentID } = data
 
-      {products && products.map((data, i) => {
-        const { img, price, name } = data
+          const configProduct = {
+            img,
+            price,
+            name, 
+            documentID
+          }
 
-        const configProduct = {
-          img,
-          price,
-          name
-        }
+          return (
+            <CardProduct key={i} {...configProduct} />
+          )
+        })}
 
-        return (
-          <CardProduct key={i} {...configProduct} />
-        )
-      })}
+      </div>
+      <LoadMore {...configLoadMore} />
     </div>
   );
 }

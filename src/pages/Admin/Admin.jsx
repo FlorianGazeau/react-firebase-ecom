@@ -23,6 +23,7 @@ const Admin = () => {
   const [price, setPrice] = useState(0);
   const [test, setTest] = useState(0)
   const [filterType, setFilterType] = useState([])
+  const {data} = products
 
   useEffect(() => {
     dispatch(fetchProducts(filterType))
@@ -52,7 +53,7 @@ const Admin = () => {
         <button onClick={() => setTest(test + 1)}>test</button>
       </div>
       <div className='admin-products'>
-        {products && products.map((product, index) => {
+        {data && data.map((product, index) => {
           const {
             name,
             img,

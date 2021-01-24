@@ -21,6 +21,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Admin from './pages/Admin/Admin';
 import { CheckAdminUser } from './utils/CheckAdminUser';
 import Search from './pages/Search/Search';
+import ProductDetails from './pages/ProductDetails/ProductDetails';
 
 const App = props => {
   const { setCurrentUser, currentUser } = props
@@ -51,7 +52,7 @@ const App = props => {
       <Switch>
         <Route exact path='/' component={Homepage} />
         <Route exact path='/search' component={Search} />
-        <Route path='/search' component={Search} />
+        <Route path='/product/:productID' component={ProductDetails} />
         <Route path='/account/login'>
           {currentUser ? <Redirect to ='/'></Redirect> : <Authentification />}
         </Route>
