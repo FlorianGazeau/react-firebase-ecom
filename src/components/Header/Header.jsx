@@ -8,13 +8,16 @@ import './Header.css'
 import Toolbar from '../Toolbar/Toolbar'
 import { CheckAdminUser } from '../../utils/CheckAdminUser'
 
-const MapState = ({user }) => ({
-  currentUser: user.currentUser
+const MapState = ({user, cartData}) => ({
+  currentUser: user.currentUser,
+  cartQuantity: cartData.cartItems.length
 })
 
 function Header() {
 
-  const { currentUser } = useSelector(MapState)
+  const { currentUser, cartQuantity } = useSelector(MapState)
+
+  console.log(cartQuantity)
 
   return (
     <>
@@ -34,7 +37,12 @@ function Header() {
             </ul>
           </div>
           <ul className='menu'>
-
+              <li>
+                <Link to='/cart'>
+                  <i class="fas fa-shopping-cart"></i>
+                  <span>({cartQuantity})</span>
+                </Link>
+              </li>
             {(!currentUser && 
               <li>
                 <Link to='/account/login'>
