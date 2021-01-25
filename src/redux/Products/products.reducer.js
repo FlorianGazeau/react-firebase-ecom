@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 }
 
 const productReducer = (state=INITIAL_STATE, action) => {
+  // console.log(action.payload)
   switch (action.type) {
     case productsTypes.FETCH_PRODUCTS_BEGIN:
       return {
@@ -44,10 +45,10 @@ const productReducer = (state=INITIAL_STATE, action) => {
         products: state.products.filter(products => products.documentID !== action.payload)
       }
     }
-    case productsTypes.FETCH_PRODUCT:
+    case productsTypes.FETCH_PRODUCT_SUCCESS:
       return {
         ...state,
-        productDetails: action.payload.data
+        productDetails: action.payload,
       }
     default:
       return state;

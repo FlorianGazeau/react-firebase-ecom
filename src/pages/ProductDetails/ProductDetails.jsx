@@ -4,7 +4,7 @@ import {fetchProduct} from '../../redux/Products/products.actions'
 import {useParams} from 'react-router-dom'
 
 const mapState = ({productsData}) => ({
-  product: productsData.ProductDetails
+  product: productsData.productDetails
 })
 
 const ProductDetails = () => {
@@ -15,13 +15,15 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(fetchProduct(productID))
-    console.log(product)
-    // console.log({productID})
   }, []);
-
+  
+  
   return (
     <div>
-      ProductDetails
+      <h1>{product.name}</h1>
+      <img src={product.img} alt=""/>
+      <p>{product.price}<span>$</span></p>
+
     </div>
   );
 }

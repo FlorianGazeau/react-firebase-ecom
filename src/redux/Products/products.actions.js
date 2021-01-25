@@ -87,7 +87,6 @@ export const fetchProductsError = () => ({
 
 
 export function deleteProduct({documentID}) {
-  console.log(documentID)
   return dispatch => { 
     dispatch(deleteProductBegin)
 
@@ -116,29 +115,20 @@ export const deleteProductSuccess = (documentID) => ({
   payload: documentID
 })
 
+
 export const fetchProduct = ({productID}) => {
-  // console.log('here')
-  // console.log(productID)
   return dispatch => {
+    dispatch(fetchProductBegin)
     return new Promise((resolve, reject) => {
       firestore
       .collection('products')
       .doc(productID)
       .get()
       .then(snapshot => {
-        console.log('hereeee')
-        console.log(snapshot.data())
-        // console.log(snapshot)
         if (snapshot.exist) {
-          resolve(
-            snapshot.data()
-            )
-            console.log('here')
-          dispatch({
-            type: productsTypes.FETCH_PRODUCT,
-            payload: snapshot.data
-          })
+          resolve()
         }
+        dispatch(fetchProductSuccess(snapshot.data()))
       })
       .catch((err) => {
         reject(err)
@@ -146,3 +136,12 @@ export const fetchProduct = ({productID}) => {
     })
   }
 }
+
+export const fetchProductBegin = () => ({
+  type: productsTypes.FETCH_PRODUCT_BEGIN
+})
+
+export const fetchProductSuccess = (product) => ({
+  type: productsTypes.FETCH_PRODUCT_SUCCESS,
+  payload: product 
+})
