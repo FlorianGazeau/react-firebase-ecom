@@ -17,8 +17,6 @@ function Header() {
 
   const { currentUser, cartQuantity } = useSelector(MapState)
 
-  console.log(cartQuantity)
-
   return (
     <>
     {currentUser && CheckAdminUser(currentUser) ? <Toolbar /> : ''}

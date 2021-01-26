@@ -1,5 +1,5 @@
 import cartTypes from './cart.types'
-import { handleAddToCart } from './cart.utils'
+import { handleAddToCart, handleReduceCartItem } from './cart.utils'
 
 const INITIAL_STATE = {
   cartItems: []
@@ -13,6 +13,19 @@ const cartReducer = (state=INITIAL_STATE, action) => {
         cartItems: handleAddToCart({
           prevCartItems: state.cartItems,
           nextCartItem: action.payload
+        })
+      }
+    case cartTypes.DELETE_TO_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(cartItems => cartItems.documentID !== action.payload)
+      }
+    case cartTypes.REDUCE_QUANTITY_PRODUCT:
+      return {
+        ...state,
+        cartItems: handleReduceCartItem({
+          prevCartItems: state.cartItems,
+          cartItemReduce: action.payload
         })
       }
     default:
