@@ -47,6 +47,8 @@ a, a:hover {
 
 ul, li {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 h4 {
@@ -56,4 +58,10 @@ h4 {
 .container {
   max-width: 1450px;
   margin: 0 auto;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
 }

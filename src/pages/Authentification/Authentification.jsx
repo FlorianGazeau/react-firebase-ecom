@@ -5,7 +5,6 @@ import SignUp from '../../components/Signup/Signup'
 import { signInWithGoogle } from '../../Firebase/utils'
 import './Authentification.css'
 
-
 const Authentification = props => {
 
   const [toggle, setToggle] = useState('signin')
