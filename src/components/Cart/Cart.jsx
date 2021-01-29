@@ -1,21 +1,28 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, deleteProduct, reduceQuantityProduct } from '../../redux/Cart/cart.actions';
+import { createStructuredSelector} from 'reselect'
+import { selectCartTotal } from '../../redux/Cart/cart.selectors';
 
 import './Cart.css'
 import Cross from '../../assets/cancel.svg'
 import Plus from '../../assets/plus.svg'
 import Minus from '../../assets/remove.svg'
 import Button from '../Form/Button/Button';
-import Test from '../../assets/test.jpg'
 
 const mapSate = ({cartData}) => ({
   products: cartData.cartItems,
 })
 
+const mapStateSelect = createStructuredSelector({
+  // cartItems: selectCartItems,
+  total: selectCartTotal
+});
+
 const Cart = (props) => {
 
   const { products, quantity } = useSelector(mapSate)
+  const { total } = useSelector(mapStateSelect)
 
   const dispatch = useDispatch()
 
@@ -46,7 +53,6 @@ const Cart = (props) => {
         <div className="cart-body">
           {products && products.map((data, i) => {
             const { img, price, name, quantity, documentID } = data
-            const finalPrice = (price * quantity)
 
             return (
               <div className="cart-item">
@@ -75,7 +81,7 @@ const Cart = (props) => {
           <p>Shipping & taxes calculated at checkout</p>
           <Button className='btn-checkout'>
             <span>Checkout</span>
-            <span>${}</span>
+            <span>${total}</span>
           </Button>
         </div>
       </div>

@@ -1,6 +1,22 @@
 .card-product {
-  width: 250px;
-  margin-bottom: 1.5em;
+  max-width: 250px;
+  margin-bottom: 1em;
+}
+
+@media screen and (min-width: 480px) {
+  .card-product {
+    margin-left:0;
+    margin-right: 0;
+    /* max-width:none; */
+    width:47.38%;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .card-product {
+    width: 270px;
+    max-width: 270px;
+  }
 }
 
 .card-thumbnail {

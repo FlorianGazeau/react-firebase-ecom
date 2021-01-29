@@ -11,15 +11,22 @@ import Cart from '../Cart/Cart'
 import './Header.css'
 import Toolbar from '../Toolbar/Toolbar'
 import { CheckAdminUser } from '../../utils/CheckAdminUser'
+import { createStructuredSelector} from 'reselect'
+import { selectCartItemsCount } from '../../redux/Cart/cart.selectors'
 
 const MapState = ({user, cartData}) => ({
   currentUser: user.currentUser,
   cartQuantity: cartData.cartItems.length
 })
 
+const MapSateSelect = createStructuredSelector({
+  quantity: selectCartItemsCount
+})
+
 function Header() {
 
   const { currentUser, cartQuantity } = useSelector(MapState)
+  const { quantity} = useSelector(MapSateSelect)
   const [show, setShow] = useState(false);
 
 function handleCart() {
@@ -58,13 +65,13 @@ function handleCart() {
           <nav className='nav nav-right hidden-mobile'>
             <ul className='hidden-mobile'>
               {currentUser ? <li><Link to='/account/profil'>Account</Link></li> : <li><Link to='/account/login'>Account</Link></li> }
-              <li onClick={handleCart}>Cart <span>({cartQuantity})</span></li>
+              <li onClick={handleCart}>Cart <span>({quantity})</span></li>
               {currentUser && <li><a href="" onClick={() => auth.signOut()}>LOGOUT</a></li>}
             </ul>
           </nav>
           <nav className='nav nav-right hidden-fullscreen'>
             <ul>
-              <li className='nav__flex'><img className='nav-icons' src={ShoppingBag} alt="Shopping-bag" onClick={() => {handleCart()}}/><span>({cartQuantity})</span></li>
+              <li className='nav__flex'><img className='nav-icons' src={ShoppingBag} alt="Shopping-bag" onClick={() => {handleCart()}}/><span>({quantity})</span></li>
               <li><img src={Logout} alt="Logout icon"/></li>
             </ul>
           </nav>

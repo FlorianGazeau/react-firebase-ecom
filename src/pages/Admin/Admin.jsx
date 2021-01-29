@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import {useDispatch, useSelector } from 'react-redux'
-import { addNewProduct, fetchProducts } from '../../redux/Products/products.actions'
+import { addNewProduct, fetchProductsAdmin } from '../../redux/Products/products.actions'
 
 import Button from '../../components/Form/Button/Button'
 import Modal from '../../components/Modal/Modal';
@@ -10,12 +10,13 @@ import ManageCardProduct from '../../components/ManageProductCard/ManageProductC
 
 const MapState = ({ productsData }) => ({
   products: productsData.products,
-  product: productsData.product
+  product: productsData.product,
+  productAdmin: productsData.productsAdmin
 })
 
 const Admin = () => {
   const dispatch = useDispatch()
-  const { products, product } = useSelector(MapState)
+  const { products, product, productAdmin } = useSelector(MapState)
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState('mens');
   const [name, setName] = useState('');
@@ -23,11 +24,11 @@ const Admin = () => {
   const [price, setPrice] = useState(0);
   const [test, setTest] = useState(0)
   const [filterType, setFilterType] = useState([])
-  const {data} = products
+  const {data} = productAdmin
 
   useEffect(() => {
-    dispatch(fetchProducts(filterType))
-  }, [product, filterType]);
+    dispatch(fetchProductsAdmin())
+  }, [product]);
 
   function handleModal() {
     setShow(true)

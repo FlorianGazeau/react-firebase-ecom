@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+
 import ShopWomen from '../../assets/ShopWomen.jpg'
 import ShopMen from '../../assets/shopMan.jpg'
 import './Directory.css'
@@ -9,12 +11,12 @@ export default function Directory() {
           <div className='directory-item' style={{
             backgroundImage: `url(${ShopWomen})`
           }}>
-            <a className='btn btn-hero' href="">SHOP WOMENS</a>
+            <Link to='/shop' className='btn btn-hero'>Shop womens</Link>
           </div>
         <div className='directory-item' style={{
           backgroundImage: `url(${ShopMen})`
         }}>
-          <a className='btn btn-hero' href="">SHOP MENS</a>
+          <Link to='/shop' className='btn btn-hero'>Shop mens</Link>
         </div>
       </div>
   )

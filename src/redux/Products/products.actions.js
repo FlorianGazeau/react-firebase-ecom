@@ -30,6 +30,42 @@ export const addNewProductSuccess = (product) => ({
   payload: product
 })
 
+export const fetchProductsAdmin = () => {
+  return dispatch => {
+    dispatch(fetchProductsAdminBegin)
+
+    return new Promise((resolve, reject) => {
+      firestore
+      .collection('products')
+      .get()
+      .then(snapshot => {
+        const data = [
+          ...snapshot.docs.map(doc => {
+            return {
+              ...doc.data(),
+              documentID: doc.id
+            }
+          })
+        ]
+        resolve({data})
+        dispatch(fetchProductsAdminSuccess({data}))
+      })
+      .catch((err) => {
+        reject(err)
+      })
+    })
+  }
+}
+
+export const fetchProductsAdminBegin = () =>  ({
+  type: productsTypes.FETCH_PRODUCTS_ADMIN_BEGIN
+})
+
+export const fetchProductsAdminSuccess = (data) =>  ({
+  type: productsTypes.FETCH_PRODUCTS_ADMIN_SUCCESS,
+  payload: { data }
+})
+
 
 export function fetchProducts({ filterType, startAfterDoc, persitProducts=[] }) {
 
@@ -38,7 +74,7 @@ export function fetchProducts({ filterType, startAfterDoc, persitProducts=[] }) 
 
     return new Promise((resolve, reject) => {
 
-      const pageSize = 6
+      const pageSize = 12
       let ref = firestore.collection('products').orderBy('createDate').limit(pageSize)
 
       if (filterType) { ref = ref.where('category', '==', filterType) }

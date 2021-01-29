@@ -62,3 +62,24 @@
   width: 100%;
   margin-top: 1em;
 }
+
+.btn-hero {
+  letter-spacing: 0.2em;
+  background: white;
+  color: #1c1b1b;
+  border: 1px solid #1c1b1b;
+  padding: 1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  margin-top: 1em;
+}
+
+.btn-hero:hover {
+  background: #1c1c1c;
+  color: white;
+  border: none;
+}

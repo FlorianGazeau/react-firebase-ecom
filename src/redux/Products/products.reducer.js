@@ -6,11 +6,11 @@ const INITIAL_STATE = {
   product: [],
   productDetails: [],
   loading: false,
-  error: null
+  error: null,
+  productsAdmin: [] 
 }
 
 const productReducer = (state=INITIAL_STATE, action) => {
-  // console.log(action.payload)
   switch (action.type) {
     case productsTypes.FETCH_PRODUCTS_BEGIN:
       return {
@@ -42,13 +42,19 @@ const productReducer = (state=INITIAL_STATE, action) => {
     case productsTypes.DELETE_PRODUCTS_SUCCESS: {
       return {
         ...state,
-        products: state.products.filter(products => products.documentID !== action.payload)
+        // products: state.productsAdmin.filter(productsAdmin => productsAdmin.documentID !== action.payload)
+        products: state.productsAdmin.filter(function (productsAdmin) { return productsAdmin.documentID === action.payload})
       }
     }
     case productsTypes.FETCH_PRODUCT_SUCCESS:
       return {
         ...state,
         productDetails: action.payload,
+    }
+    case productsTypes.FETCH_PRODUCTS_ADMIN_SUCCESS: 
+      return {
+        ...state,
+        productsAdmin: action.payload.data
       }
     default:
       return state;

@@ -16,19 +16,17 @@ const ManageProductCard = ({ productName, productThumbnail, productPrice, docume
   }
 
   return (
-    <div className='card'>
-      <div className="card-content">
-        <div className="card-thumbnail">
-          <img src={productThumbnail} alt={productName}/>
-        </div>
-        <div className="card-body">
-          <h4 className="card-title">{productName}</h4>
-          <p>{productPrice}<span>$</span></p>
-          <Button onClick={handleDeleteProduct}>
-            Delete Product
-          </Button>
-        </div>
+    <div className='card-product'>
+      <div className="card-thumbnail">
+        <img src={productThumbnail} alt={productName}/>
       </div>
+      <div className='card-wrapper'>
+        <h4 className="card-title">{productName}</h4>
+      </div>
+      <p className="card-price">{productPrice}<span>$</span></p>
+      <Button onClick={handleDeleteProduct} className='btn-cart'>
+        delete product
+      </Button>
     </div>
   );
 }
