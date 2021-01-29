@@ -22,7 +22,6 @@ import Admin from './pages/Admin/Admin';
 import { CheckAdminUser } from './utils/CheckAdminUser';
 import Search from './pages/Search/Search';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
-import Cart from './pages/Cart/Cart';
 
 const App = props => {
   const { setCurrentUser, currentUser } = props
@@ -52,9 +51,8 @@ const App = props => {
       <Header />
       <Switch>
         <Route exact path='/' component={Homepage} />
-        <Route exact path='/search' component={Search} />
+        <Route exact path='/shop' component={Search} />
         <Route path='/product/:productID' component={ProductDetails} />
-        <Route path='/cart' component={Cart} />
         <Route path='/account/login'>
           {currentUser ? <Redirect to ='/'></Redirect> : <Authentification />}
         </Route>

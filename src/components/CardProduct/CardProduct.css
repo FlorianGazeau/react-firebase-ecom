@@ -1,0 +1,40 @@
+.card-product {
+  width: 250px;
+  margin-bottom: 1.5em;
+}
+
+.card-thumbnail {
+  width: 100%;
+}
+
+.card-thumbnail img {
+  width: 100%;
+}
+
+.card-wrapper {
+  margin: 1em 0.5em;
+}
+
+.card-title {
+  width: 100%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #1c1b1b;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: center;
+  /* margin: 1em; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-price {
+  margin-bottom: 1em;
+  color: #6a6a6a;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.6em;
+  text-align: center;
+}

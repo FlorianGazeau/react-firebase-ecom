@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { auth } from '../../Firebase/utils'
@@ -6,6 +6,7 @@ import Logo from '../../assets/logo.png'
 import ShoppingBag from '../../assets/shopping-bag.svg'
 import MenuIcon from '../../assets/menu.svg'
 import Logout from '../../assets/logout.svg'
+import Cart from '../Cart/Cart'
 
 import './Header.css'
 import Toolbar from '../Toolbar/Toolbar'
@@ -19,6 +20,12 @@ const MapState = ({user, cartData}) => ({
 function Header() {
 
   const { currentUser, cartQuantity } = useSelector(MapState)
+  const [show, setShow] = useState(false);
+
+function handleCart() {
+  setShow(true)
+  console.log('here')
+}
 
   return (
     <>
@@ -51,13 +58,13 @@ function Header() {
           <nav className='nav nav-right hidden-mobile'>
             <ul className='hidden-mobile'>
               {currentUser ? <li><Link to='/account/profil'>Account</Link></li> : <li><Link to='/account/login'>Account</Link></li> }
-              <li><Link to='/cart'>Cart<span>({cartQuantity})</span></Link></li>
+              <li onClick={handleCart}>Cart <span>({cartQuantity})</span></li>
               {currentUser && <li><a href="" onClick={() => auth.signOut()}>LOGOUT</a></li>}
             </ul>
           </nav>
           <nav className='nav nav-right hidden-fullscreen'>
             <ul>
-              <li><Link to='/cart' className='nav__flex'><img className='nav-icons' src={ShoppingBag} alt="Shopping-bag"/><span className='nav__quantity'>({cartQuantity})</span></Link></li>
+              <li className='nav__flex'><img className='nav-icons' src={ShoppingBag} alt="Shopping-bag" onClick={() => {handleCart()}}/><span>({cartQuantity})</span></li>
               <li><img src={Logout} alt="Logout icon"/></li>
             </ul>
           </nav>
@@ -65,6 +72,7 @@ function Header() {
         </div>
       </div>
     </header>
+    <Cart onClose={() => setShow(false)} show={show} />
     </>
   )
 }

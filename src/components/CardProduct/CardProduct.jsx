@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {addProduct} from '../../redux/Cart/cart.actions'
 import Button from '../Form/Button/Button';
+import './CardProduct.css'
 
 const CardProduct = ({ img, price, name, documentID }) => {
   
@@ -20,9 +21,11 @@ const CardProduct = ({ img, price, name, documentID }) => {
           <img src={img} alt={name}/>
         </Link>
       </div>
-      <h4 className="card-title">{name}</h4>
+      <div className='card-wrapper'>
+        <h4 className="card-title">{name}</h4>
+      </div>
       <p className="card-price">{price}<span>$</span></p>
-      <Button onClick={() => handleAddProduct(img, price, name, documentID)}>
+      <Button onClick={() => handleAddProduct(img, price, name, documentID)} className='btn-cart'>
         ADD TO CART
       </Button>
     </div>

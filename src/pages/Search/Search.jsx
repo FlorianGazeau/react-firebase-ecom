@@ -4,6 +4,8 @@ import CardProduct from '../../components/CardProduct/CardProduct';
 import LoadMore from '../../components/LoadMore/LoadMore';
 import { fetchProducts } from '../../redux/Products/products.actions';
 
+import './Search.css'
+
 const MapState = ({productsData}) => ({
   products: productsData.products
 })
@@ -42,46 +44,50 @@ const Search = () => {
   if (data && data.length < 1) {
     return (
       <div className='searchPage'>
-        <div>
-          <select name="" id="" onChange={handleFilter}>
-            {/* <option value="">Show All</option> */}
-            <option value="mens">Mens</option>
-            <option value="womens">Womens</option>
-          </select>
+        <div className='searchpage__wrapper'>
+          <div className='select'>
+            <select name="slct" id="slct"  onChange={handleFilter}>
+              <option value="">Show All</option>
+              <option value="mens">Mens</option>
+              <option value="womens">Womens</option>
+            </select>
+          </div>
+          <div className='products-result'>
+            <h2>No search result</h2>
+          </div>
         </div>
-        <h4>No search result</h4>
       </div>
     )
   }
   return (
-
     <div className='searchPage'>
+      <div className="searchpage__wrapper">
+        <div className='select'>
+          <select name="slct" id="slct"  onChange={handleFilter}>
+            <option value="">Show All</option>
+            <option value="mens">Mens</option>
+            <option value="womens">Womens</option>
+          </select>
+        </div>
+        <div className='products-result'>
+          {data && data.map((data, i) => {
+            const { img, price, name, documentID } = data
 
-      <div>
-        <select name="" id="" onChange={handleFilter}>
-          <option value="">Show All</option>
-          <option value="mens">Mens</option>
-          <option value="womens">Womens</option>
-        </select>
+            const configProduct = {
+              img,
+              price,
+              name, 
+              documentID
+            }
+
+            return (
+              <CardProduct key={i} {...configProduct} />
+            )
+          })}
+
+        </div>
+        <LoadMore {...configLoadMore} />
       </div>
-      <div className='result'>
-        {data && data.map((data, i) => {
-          const { img, price, name, documentID } = data
-
-          const configProduct = {
-            img,
-            price,
-            name, 
-            documentID
-          }
-
-          return (
-            <CardProduct key={i} {...configProduct} />
-          )
-        })}
-
-      </div>
-      <LoadMore {...configLoadMore} />
     </div>
   );
 }

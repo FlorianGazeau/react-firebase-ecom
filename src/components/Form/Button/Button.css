@@ -1,0 +1,38 @@
+.btn-cart {
+  text-align: center;
+  width: 100%;
+  background: #1c1b1b;
+  color: white;
+  /* letter-spacing: 0.2em; */
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 0.8em;
+  cursor: pointer;
+}
+
+.btn-loadmore {
+  border: 1px solid #1c1b1b;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 0.8em;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+}
+
+.btn-checkout {
+  text-align: center;
+  background: #1c1b1b;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 0.8em;
+  cursor: pointer;
+  width: 250px;
+}
