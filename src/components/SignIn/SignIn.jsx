@@ -38,6 +38,7 @@ const Signin = () => {
 
   return (
     <>
+      <p>Please enter your e-mail and password:</p>
       {error.length > 0 && <span>{error}</span>}
       <Form onSubmit={handleSubmit}>
         <FormInput 
@@ -46,6 +47,7 @@ const Signin = () => {
           value={email}
           placeholder='Your email'
           handleChange={(e) => setEmail(e.target.value)}
+          className='form-input'
         />
         <FormInput 
           type='password'
@@ -53,8 +55,9 @@ const Signin = () => {
           value={password}
           placeholder='Your password'
           handleChange={(e) => setPassword(e.target.value)}
+          className='form-input'
         />
-        <Button type='submit' className='btn'>
+        <Button type='submit' className='btn btn-submit'>
           Sign up
         </Button>
       </Form>

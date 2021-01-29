@@ -3,7 +3,6 @@
   width: 100%;
   background: #1c1b1b;
   color: white;
-  /* letter-spacing: 0.2em; */
   text-transform: uppercase;
   font-weight: 500;
   font-size: 0.8em;
@@ -35,4 +34,31 @@
   padding: 0.8em;
   cursor: pointer;
   width: 250px;
+}
+
+.btn-submit {
+  background-color: #1c1b1b;
+  padding: 1em;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 1em;
+}
+
+.btn-google {
+  color: #1c1b1b;
+  border: 1px solid #1c1b1b;
+  padding: 1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 1em;
 }

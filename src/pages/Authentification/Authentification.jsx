@@ -20,7 +20,7 @@ const Authentification = props => {
           {toggle === 'signin' ? <SignIn /> : <SignUp />}
         </div>
         <div className="registration-footer">
-          <Button onClick={signInWithGoogle} className='btn'>
+          <Button onClick={signInWithGoogle} className='btn btn-google'>
             Sign In With Google
           </Button>
         </div>

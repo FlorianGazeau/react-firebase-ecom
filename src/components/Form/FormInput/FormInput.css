@@ -1,3 +1,18 @@
 input {
   margin: 1em 0;
 }
+
+input:nth-child(1n) {
+  margin-top: 0;
+}
+
+.form-input {
+  padding: 1em;
+  /* letter-spacing: 0.2em; */
+  /* text-transform: uppercase; */
+  color: #1c1b1b;
+  font-weight: 500;
+  font-size: 0.7em;
+  /* margin-bottom: 0.5em; */
+  border: 1px solid #cfcfcf;
+}

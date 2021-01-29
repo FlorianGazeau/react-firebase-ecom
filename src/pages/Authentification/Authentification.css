@@ -2,11 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: calc(100% - 80px);
 }
 
 .registration-content {
   margin: 10px;
-  width: 500px;
+  width: 400px;
 }
 
 .registration-header {
@@ -18,8 +19,28 @@
   text-align: center;
   border: 1px solid black;
   padding: 15px;
+  cursor: pointer;
 }
 
 .registration-header h4:nth-child(2) {
   border-left: none;
+}
+
+.registration-body {
+  text-align: center;
+}
+
+.registration-body p {
+  /* letter-spacing: 0.2em; */
+  color: #1c1b1b;
+  font-weight: 500;
+  font-size: 0.8em;
+  margin: 2em 0;
+  text-align: center;
+}
+
+.registration-body a {
+  color: #1c1b1b;
+  font-weight: 500;
+  font-size: 0.8em;
 }

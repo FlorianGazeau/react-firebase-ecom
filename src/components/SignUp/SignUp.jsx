@@ -48,6 +48,8 @@ const Signup = () => {
   }
 
   return (
+    <>
+    <p>Please fill in the information below:</p>
     <Form action="" onSubmit={handleSubmit}>
       {error.length > 0 && <span>{error}</span>}
 
@@ -59,6 +61,7 @@ const Signup = () => {
         className="input form-field"
         required
         handleChange={(e) => setDisplayName(e.target.value)}
+        className='form-input'
       />
       <FormInput
         type='email'
@@ -68,6 +71,7 @@ const Signup = () => {
         className="input form-field"
         required
         handleChange={(e) => setEmail(e.target.value)}
+        className='form-input'
       />
       <FormInput
         type='password'
@@ -77,6 +81,7 @@ const Signup = () => {
         className="input form-field"
         required
         handleChange={(e) => setPassword(e.target.value)}
+        className='form-input'
       />
       <FormInput
         type='password'
@@ -86,11 +91,13 @@ const Signup = () => {
         className="input form-field"
         required
         handleChange={(e) => setConfirmPassword(e.target.value)}
+        className='form-input'
       />
-      <Button className='btn' type='submit'>
+      <Button className='btn btn-submit' type='submit'>
         Sign In
       </Button>
     </Form>
+    </>
   )
 }
 
