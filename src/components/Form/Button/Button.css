@@ -83,3 +83,18 @@
   color: white;
   border: none;
 }
+
+.btn-add {
+  text-align: center;
+  background: #1c1b1b;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 0.8em;
+  cursor: pointer;
+  width: 250px;
+  height: 50px;
+  /* display: flex; */
+}

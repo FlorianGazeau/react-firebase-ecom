@@ -45,15 +45,14 @@ const Admin = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='wrapper'>
       <div className='admin-nav'>
         <h4 className='admin-title'>List of All Products</h4>
-        <Button onClick={handleModal}>
+        <Button onClick={handleModal} className='btn btn-add'>
           Add New Product
         </Button>
-        <button onClick={() => setTest(test + 1)}>test</button>
       </div>
-      <div className='admin-products'>
+      <div className='flex-grid'>
         {data && data.map((product, index) => {
           const {
             name,
@@ -75,16 +74,19 @@ const Admin = () => {
       </div>
       <Modal title='Add New Product' onClose={() => setShow(false)} show={show}>
         <form onSubmit={handleSubmit}>
-          <select name='Category' onChange={(e) => setCategory(e.target.value)}>
-            <option value="mens">Mens</option>
-            <option value="womens">Womens</option>
-          </select>
+          <div className="select">
+            <select name='Category' onChange={(e) => setCategory(e.target.value)}>
+              <option value="mens">Mens</option>
+              <option value="womens">Womens</option>
+            </select>
+          </div>
           <FormInput 
             type='text'
             name='name'
             value={name}
             placeholder='Name of product'
             handleChange={(e) => setName(e.target.value)}
+            className='form-input'
           />
           <FormInput 
             type='text'
@@ -92,6 +94,7 @@ const Admin = () => {
             value={img}
             placeholder='Image URL'
             handleChange={(e) => setImg(e.target.value)}
+            className='form-input'
           />
           <FormInput 
             type='text'
@@ -99,8 +102,9 @@ const Admin = () => {
             value={price}
             placeholder='Price of product'
             handleChange={(e) => setPrice(e.target.value)}
+            className='form-input'
           />
-          <Button type='submit'>
+          <Button type='submit' className='btn btn-submit'>
             Add Product
           </Button>
         </form>

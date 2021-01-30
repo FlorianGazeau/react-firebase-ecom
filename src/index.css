@@ -55,11 +55,6 @@ h4, h3, p {
   margin: 0;
 }
 
-.container {
-  max-width: 1450px;
-  margin: 0 auto;
-}
-
 button {
   background: none;
   border: none;
