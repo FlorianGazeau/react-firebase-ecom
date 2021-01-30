@@ -1,13 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {useSpring, animated} from 'react-spring'
 
 import ShopWomen from '../../assets/ShopWomen.jpg'
 import ShopMen from '../../assets/shopMan.jpg'
 import './Directory.css'
 
 export default function Directory() {
+  const animation = useSpring({opacity: 1, from: {opacity: 0}} )
   return (
-        <div className='directory'>
+        <animated.div className='directory' style={animation}>
           <div className='directory-item' style={{
             backgroundImage: `url(${ShopWomen})`
           }}>
@@ -18,6 +20,6 @@ export default function Directory() {
         }}>
           <Link to='/shop' className='btn btn-hero'>Shop mens</Link>
         </div>
-      </div>
+      </animated.div>
   )
 }

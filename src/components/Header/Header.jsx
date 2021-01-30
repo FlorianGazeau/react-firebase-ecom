@@ -13,6 +13,7 @@ import Toolbar from '../Toolbar/Toolbar'
 import { CheckAdminUser } from '../../utils/CheckAdminUser'
 import { createStructuredSelector} from 'reselect'
 import { selectCartItemsCount } from '../../redux/Cart/cart.selectors'
+import Cross from '../../assets/cancel.svg'
 
 const MapState = ({user, cartData}) => ({
   currentUser: user.currentUser,
@@ -28,11 +29,13 @@ function Header() {
   const { currentUser, cartQuantity } = useSelector(MapState)
   const { quantity} = useSelector(MapSateSelect)
   const [show, setShow] = useState(false);
+  const [sidebar, setSidebar] = useState(false)
 
-function handleCart() {
-  setShow(true)
-  console.log('here')
-}
+  function handleCart() {
+    setShow(true)
+  }
+
+  const showSidebar = () => setSidebar(!sidebar)
 
   return (
     <>
@@ -40,11 +43,22 @@ function handleCart() {
     <header className="header">
       <div className="header__wrapper">
         <div className="header__nav header__nav--fill">
-          <button className='nav__menu--icon'>
+          <button className='nav__menu--icon' onClick={showSidebar}>
             <span className='hidden-fullscreen'>
-              <img src={MenuIcon} alt="menu icon"/>
+              <img className='menuIcon' src={MenuIcon} alt="menu icon"/>
             </span>
           </button>
+          <div className={sidebar ? 'sidenav active' : 'sidenav'}>
+            <div className='sidenav-header'>
+              <img className='menuIcon' src={Cross} alt="cross icon" onClick={() => setSidebar(false)}/>
+            </div>
+            <ul onClick={() => setSidebar(false)} className='sidenav-content'>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='/shop'>Shop</Link></li>
+              <li><Link to='/about'>About</Link></li>
+              <li><Link to='/faq'>FAQ</Link></li>
+            </ul>
+          </div>
           <nav className='nav nav-left hidden-mobile'>
             <ul>
               <li><Link to='/'>Home</Link></li>

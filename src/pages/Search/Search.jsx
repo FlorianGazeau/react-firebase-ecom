@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import CardProduct from '../../components/CardProduct/CardProduct';
 import LoadMore from '../../components/LoadMore/LoadMore';
 import { fetchProducts } from '../../redux/Products/products.actions';
+import {useSpring, animated} from 'react-spring'
 
 import './Search.css'
 
@@ -11,7 +12,7 @@ const MapState = ({productsData}) => ({
 })
 
 const Search = () => {
-
+  const animation = useSpring({opacity: 1, from: {opacity: 0}} )
   const dispatch = useDispatch()
   const [filterType, setFilterType] = useState('');
   const { products } = useSelector(MapState)
@@ -69,7 +70,7 @@ const Search = () => {
             <option value="womens">Womens</option>
           </select>
         </div>
-        <div className='products-result'>
+        <animated.div className='products-result' style={animation}>
           {data && data.map((data, i) => {
             const { img, price, name, documentID } = data
 
@@ -85,7 +86,7 @@ const Search = () => {
             )
           })}
 
-        </div>
+        </animated.div>
         <LoadMore {...configLoadMore} />
       </div>
     </div>

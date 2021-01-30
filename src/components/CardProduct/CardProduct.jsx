@@ -3,10 +3,12 @@ import {Link} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {addProduct} from '../../redux/Cart/cart.actions'
 import Button from '../Form/Button/Button';
+import {useSpring, animated} from 'react-spring'
 import './CardProduct.css'
 
 const CardProduct = ({ img, price, name, documentID }) => {
   
+  const animation = useSpring({opacity: 1, from: {opacity: 0}, config: { duration: 1000 },} )
   const dispatch = useDispatch()
 
   const handleAddProduct = (img, price, name, documentID) => {
@@ -15,7 +17,7 @@ const CardProduct = ({ img, price, name, documentID }) => {
   }
 
   return (
-    <div className='card-product'>
+    <animated.div className='card-product' style={animation} >
       <div className="card-thumbnail">
         <Link to={`product/${documentID}`}>
           <img src={img} alt={name}/>
@@ -28,7 +30,7 @@ const CardProduct = ({ img, price, name, documentID }) => {
       <Button onClick={() => handleAddProduct(img, price, name, documentID)} className='btn-cart'>
         ADD TO CART
       </Button>
-    </div>
+    </animated.div>
   );
 }
 

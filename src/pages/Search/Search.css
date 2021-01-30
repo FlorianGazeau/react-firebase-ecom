@@ -5,22 +5,8 @@
 .products-result {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
   justify-content: center;
 }
-
-/* .products-result {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.products-result:after {
-  content: "";
-  flex: auto;
-} */
 
 
 select {
@@ -31,7 +17,6 @@ select {
   outline: 0;
   box-shadow: none;
   border: 0 !important;
-  /* background: #2c3e50; */
   background-image: none;
 }
 
@@ -113,14 +98,6 @@ select {
   }
 }
 
-/* @media screen and (min-width: 560px) {
-  
-  .products-result:after {
-    content: '';
-    display: block;
-    margin-left: 48.38%;
-  }
-} */
 
 @media screen and (min-width: 768px) { 
   .products-result:after {

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, deleteProduct, reduceQuantityProduct } from '../../redux/Cart/cart.actions';
 import { createStructuredSelector} from 'reselect'
 import { selectCartTotal } from '../../redux/Cart/cart.selectors';
+import {useSpring, animated} from 'react-spring'
 
 import './Cart.css'
 import Cross from '../../assets/cancel.svg'
@@ -15,15 +16,14 @@ const mapSate = ({cartData}) => ({
 })
 
 const mapStateSelect = createStructuredSelector({
-  // cartItems: selectCartItems,
   total: selectCartTotal
 });
 
 const Cart = (props) => {
-
-  const { products, quantity } = useSelector(mapSate)
+  
+  const { products } = useSelector(mapSate)
   const { total } = useSelector(mapStateSelect)
-
+  // const [close, toggle] = useState(false)
   const dispatch = useDispatch()
 
   
@@ -31,9 +31,7 @@ const Cart = (props) => {
     dispatch(addProduct({documentID}))
   }
   const handleReduceQuantityProduct = (product) => {
-    // console.log(product)
     dispatch(reduceQuantityProduct(product))
-    // dispatch(reduceQuantityProduct({product}))
   }
   const handleDeleteProductFromChart = (documentID) => {
     dispatch(deleteProduct({documentID}))
@@ -45,7 +43,7 @@ const Cart = (props) => {
 
   return (
     <div className='cart' onClick={props.onClose}>
-      <div className="cart-content" onClick={e => e.stopPropagation()}>
+      <div className={props.show ? `cart-content` : 'closeNav'} onClick={e => e.stopPropagation()}>
         <div className="cart-header">
           <h3>Cart</h3>
           <img src={Cross} alt="cross icon" onClick={props.onClose}/>
@@ -55,25 +53,25 @@ const Cart = (props) => {
             const { img, price, name, quantity, documentID } = data
 
             return (
-              <div className="cart-item">
-                <div className="cart-thumbnail">
-                  <img src={img} alt={name}/>
-                </div>
-                <div className="cart-info">
-                  <div>
-                    <h4 className="cart-title">{name}</h4>
-                    <span className='cart-price'>${price}</span>
+                <animated.div className="cart-item">
+                  <div className="cart-thumbnail">
+                    <img src={img} alt={name}/>
                   </div>
-                  <div className='cart-data'>
-                    <div className='cart-quantity'>
-                      <img src={Minus} alt="" onClick={() => handleReduceQuantityProduct(data)}/>
-                      <span>{quantity}</span>
-                      <img src={Plus} alt="" onClick={() => handleAddQuantityProduct(documentID)}/>
+                  <div className="cart-info">
+                    <div>
+                      <h4 className="cart-title">{name}</h4>
+                      <span className='cart-price'>${price}</span>
                     </div>
-                    <p className='cart-remove' onClick={() => handleDeleteProductFromChart(documentID)}>remove</p>
+                    <div className='cart-data'>
+                      <div className='cart-quantity'>
+                        <img src={Minus} alt="" onClick={() => handleReduceQuantityProduct(data)}/>
+                        <span>{quantity}</span>
+                        <img src={Plus} alt="" onClick={() => handleAddQuantityProduct(documentID)}/>
+                      </div>
+                      <p className='cart-remove' onClick={() => handleDeleteProductFromChart(documentID)}>remove</p>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </animated.div>
             )
           })}
         </div>
