@@ -9,22 +9,18 @@ import './Admin.css'
 import ManageCardProduct from '../../components/ManageProductCard/ManageProductCard'
 
 const MapState = ({ productsData }) => ({
-  products: productsData.products,
   product: productsData.product,
   productAdmin: productsData.productsAdmin
 })
 
 const Admin = () => {
   const dispatch = useDispatch()
-  const { products, product, productAdmin } = useSelector(MapState)
+  const { product, productAdmin } = useSelector(MapState)
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState('mens');
   const [name, setName] = useState('');
   const [img, setImg] = useState('');
   const [price, setPrice] = useState(0);
-  const [test, setTest] = useState(0)
-  const [filterType, setFilterType] = useState([])
-  const {data} = productAdmin
 
   useEffect(() => {
     dispatch(fetchProductsAdmin())
@@ -53,7 +49,7 @@ const Admin = () => {
         </Button>
       </div>
       <div className='flex-grid'>
-        {data && data.map((product, index) => {
+        {productAdmin && productAdmin.map((product, index) => {
           const {
             name,
             img,
@@ -87,6 +83,7 @@ const Admin = () => {
             placeholder='Name of product'
             handleChange={(e) => setName(e.target.value)}
             className='form-input'
+            required
           />
           <FormInput 
             type='text'
@@ -95,6 +92,7 @@ const Admin = () => {
             placeholder='Image URL'
             handleChange={(e) => setImg(e.target.value)}
             className='form-input'
+            required
           />
           <FormInput 
             type='text'
@@ -103,7 +101,9 @@ const Admin = () => {
             placeholder='Price of product'
             handleChange={(e) => setPrice(e.target.value)}
             className='form-input'
+            required
           />
+          <textarea placeholder='Enter Your Description' className='form-input'></textarea>
           <Button type='submit' className='btn btn-submit'>
             Add Product
           </Button>

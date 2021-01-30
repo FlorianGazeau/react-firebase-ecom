@@ -1,5 +1,6 @@
 import productsTypes from './products.types'
 import { firestore } from '../../Firebase/utils'
+import { bindActionCreators } from 'redux'
 
 export function addNewProduct(product) {
   return dispatch => {
@@ -28,42 +29,6 @@ export const addNewProductStart = () => ({
 export const addNewProductSuccess = (product) => ({
   type: productsTypes.ADD_NEW_PRODUCTS_SUCCESS,
   payload: product
-})
-
-export const fetchProductsAdmin = () => {
-  return dispatch => {
-    dispatch(fetchProductsAdminBegin)
-
-    return new Promise((resolve, reject) => {
-      firestore
-      .collection('products')
-      .get()
-      .then(snapshot => {
-        const data = [
-          ...snapshot.docs.map(doc => {
-            return {
-              ...doc.data(),
-              documentID: doc.id
-            }
-          })
-        ]
-        resolve({data})
-        dispatch(fetchProductsAdminSuccess({data}))
-      })
-      .catch((err) => {
-        reject(err)
-      })
-    })
-  }
-}
-
-export const fetchProductsAdminBegin = () =>  ({
-  type: productsTypes.FETCH_PRODUCTS_ADMIN_BEGIN
-})
-
-export const fetchProductsAdminSuccess = (data) =>  ({
-  type: productsTypes.FETCH_PRODUCTS_ADMIN_SUCCESS,
-  payload: { data }
 })
 
 
@@ -122,36 +87,6 @@ export const fetchProductsError = () => ({
 })
 
 
-export function deleteProduct({documentID}) {
-  return dispatch => { 
-    dispatch(deleteProductBegin)
-
-    return new Promise((resolve, reject) => {
-      firestore
-        .collection('products')
-        .doc(documentID)
-        .delete()
-        .then(() => {
-          resolve()
-          dispatch(deleteProductSuccess(documentID ))
-        })
-        .catch((err) => {
-          reject(err)
-        })
-    })
-  }
-}
-
-export const deleteProductBegin = () => ({
-  type: productsTypes.DELETE_PRODUCTS_BEGIN
-})
-
-export const deleteProductSuccess = (documentID) => ({
-  type: productsTypes.DELETE_PRODUCTS_SUCCESS,
-  payload: documentID
-})
-
-
 export const fetchProduct = ({productID}) => {
   return dispatch => {
     dispatch(fetchProductBegin)
@@ -180,4 +115,80 @@ export const fetchProductBegin = () => ({
 export const fetchProductSuccess = (product) => ({
   type: productsTypes.FETCH_PRODUCT_SUCCESS,
   payload: product 
+})
+
+
+// GOOD NOW
+
+export function fetchProductsAdmin() {
+  return dispatch => {
+    dispatch(fetchProductsAdminBegin)
+
+    return new Promise((resolve, reject) => {
+      firestore
+      .collection('products')
+      .get()
+      .then(snapshot => {
+        const productsArray = snapshot.docs.map(doc => {
+            return {
+              ...doc.data(),
+              documentID: doc.id
+            }
+          })
+        resolve()
+        dispatch(fetchProductsAdminSuccess(productsArray))
+      })
+      .catch((err) => {
+        reject(err)
+      })
+    })
+  }
+}
+
+export const fetchProductsAdminBegin = () => ({
+  type: productsTypes.FETCH_PRODUCTS_ADMIN_BEGIN
+})
+
+export const fetchProductsAdminSuccess = products => ({
+  type: productsTypes.FETCH_PRODUCTS_ADMIN_SUCCESS,
+  payload: {products }
+})
+
+export const fetchProductsAdminFailure = errors => ({
+  type: productsTypes.FETCH_PRODUCTS_ADMIN_FAILURE,
+  payload: { errors }
+})
+
+export function deleteProduct({documentID}) {
+  return dispatch => { 
+    dispatch(deleteProductBegin)
+
+    return new Promise((resolve, reject) => {
+      firestore
+        .collection('products')
+        .doc(documentID)
+        .delete()
+        .then(() => {
+          resolve()
+          dispatch(deleteProductSuccess(documentID ))
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  }
+}
+
+export const deleteProductBegin = () => ({
+  type: productsTypes.DELETE_PRODUCTS_BEGIN
+})
+
+export const deleteProductSuccess = (documentID) => ({
+  type: productsTypes.DELETE_PRODUCTS_SUCCESS,
+  payload: {documentID} 
+})
+
+export const deleteProductFailure = (errors) => ({
+  type: productsTypes.DELETE_PRODUCTS_FAILURE,
+  payload: { errors }
 })
