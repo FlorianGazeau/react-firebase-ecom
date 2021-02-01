@@ -15,9 +15,8 @@ import { createStructuredSelector} from 'reselect'
 import { selectCartItemsCount } from '../../redux/Cart/cart.selectors'
 import Cross from '../../assets/cancel.svg'
 
-const MapState = ({user, cartData}) => ({
-  currentUser: user.currentUser,
-  cartQuantity: cartData.cartItems.length
+const MapState = ({user}) => ({
+  currentUser: user.currentUser
 })
 
 const MapSateSelect = createStructuredSelector({
@@ -26,7 +25,7 @@ const MapSateSelect = createStructuredSelector({
 
 function Header() {
 
-  const { currentUser, cartQuantity } = useSelector(MapState)
+  const { currentUser} = useSelector(MapState)
   const { quantity} = useSelector(MapSateSelect)
   const [show, setShow] = useState(false);
   const [sidebar, setSidebar] = useState(false)
@@ -80,7 +79,7 @@ function Header() {
             <ul className='hidden-mobile'>
               {currentUser ? <li><Link to='/account/profil'>Account</Link></li> : <li><Link to='/account/login'>Account</Link></li> }
               <li onClick={handleCart}>Cart <span>({quantity})</span></li>
-              {currentUser && <li><a href="" onClick={() => auth.signOut()}>LOGOUT</a></li>}
+              {currentUser && <li><Link onClick={() => auth.signOut()}>LOGOUT</Link></li>}
             </ul>
           </nav>
           <nav className='nav nav-right hidden-fullscreen'>

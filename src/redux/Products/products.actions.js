@@ -1,6 +1,5 @@
 import productsTypes from './products.types'
 import { firestore } from '../../Firebase/utils'
-import { bindActionCreators } from 'redux'
 
 export function addNewProduct(product) {
   return dispatch => {

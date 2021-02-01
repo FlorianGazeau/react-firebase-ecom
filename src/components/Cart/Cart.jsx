@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, deleteProduct, reduceQuantityProduct } from '../../redux/Cart/cart.actions';
 import { createStructuredSelector} from 'reselect'
 import { selectCartTotal } from '../../redux/Cart/cart.selectors';
-import {useSpring, animated} from 'react-spring'
 
 import './Cart.css'
 import Cross from '../../assets/cancel.svg'
@@ -23,7 +22,6 @@ const Cart = (props) => {
   
   const { products } = useSelector(mapSate)
   const { total } = useSelector(mapStateSelect)
-  // const [close, toggle] = useState(false)
   const dispatch = useDispatch()
 
   
@@ -53,7 +51,7 @@ const Cart = (props) => {
             const { img, price, name, quantity, documentID } = data
 
             return (
-                <animated.div className="cart-item">
+                <div className="cart-item">
                   <div className="cart-thumbnail">
                     <img src={img} alt={name}/>
                   </div>
@@ -71,7 +69,7 @@ const Cart = (props) => {
                       <p className='cart-remove' onClick={() => handleDeleteProductFromChart(documentID)}>remove</p>
                     </div>
                   </div>
-                </animated.div>
+                </div>
             )
           })}
         </div>

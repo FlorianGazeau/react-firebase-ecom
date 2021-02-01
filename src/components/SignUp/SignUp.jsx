@@ -56,44 +56,36 @@ const Signup = () => {
         name="displayName" 
         value={displayName}
         placeholder="Full Name"
-        className="input form-field"
         required
         handleChange={(e) => setDisplayName(e.target.value)}
-        className='form-input'
-        required
+        className='form-input input form-field'
       />
       <FormInput
         type='email'
         name="email" 
         value={email}
         placeholder="Your Email"
-        className="input form-field"
         required
         handleChange={(e) => setEmail(e.target.value)}
-        className='form-input'
-        required
+        className='form-input input form-field'
       />
       <FormInput
         type='password'
         name="password" 
         value={password}
         placeholder="Your Password"
-        className="input form-field"
         required
         handleChange={(e) => setPassword(e.target.value)}
-        className='form-input'
-        required
+        className='form-input input form-field'
       />
       <FormInput
         type='password'
         name="confirmPassword" 
         value={confirmPassword}
         placeholder="Confirm your password"
-        className="input form-field"
         required
         handleChange={(e) => setConfirmPassword(e.target.value)}
-        className='form-input'
-        required
+        className='form-input input form-field'
       />
       <Button className='btn btn-submit' type='submit'>
         Sign In
