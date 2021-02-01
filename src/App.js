@@ -44,7 +44,7 @@ const App = props => {
     return() => {
       authListener()
     }
-  }, [])
+  }, [setCurrentUser])
 
   return (
     <Router>

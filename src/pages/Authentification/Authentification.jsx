@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import Button from '../../components/Form/Button/Button'
-// import SignIn from '../../components/Signin/Signin'
-// import SignUp from '../../components/Signup/Signup'
-// import Signin  from '../../components/Signin/Signin'
-// import Signup from '../../components/Signup/Signup'
+
 import Signin  from '../Signin/Signin'
 import Signup  from '../Signup/Signup'
 import { signInWithGoogle } from '../../Firebase/utils'

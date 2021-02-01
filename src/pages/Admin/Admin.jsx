@@ -24,7 +24,7 @@ const Admin = () => {
 
   useEffect(() => {
     dispatch(fetchProductsAdmin())
-  }, [product]);
+  }, [product, dispatch]);
 
   function handleModal() {
     setShow(true)

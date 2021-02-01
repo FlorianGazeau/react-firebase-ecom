@@ -20,7 +20,7 @@ const Search = () => {
   
   useEffect(() => {
     dispatch(fetchProducts({ filterType }))
-  }, [filterType]);
+  }, [filterType, dispatch]);
   
   const handleFilter = (e) => {
     const nextFilter = e.target.value

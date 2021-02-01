@@ -29,7 +29,7 @@ const ForgetPassword = () => {
     if(resetPasswordSuccess) {
       history.push('/')
     }
-  }, [resetPasswordSuccess]);
+  }, [resetPasswordSuccess, history]);
 
   useEffect(() => {
     if(resetPasswordError) {

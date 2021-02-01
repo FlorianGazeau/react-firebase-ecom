@@ -17,9 +17,11 @@ const ProductDetails = () => {
   const dispatch = useDispatch()
   const productID = useParams()
 
+  
   useEffect(() => {
     dispatch(fetchProduct(productID))
-  }, []);
+
+  }, [productID, dispatch]);
   
   const handleAddProduct = (img, price, name, documentID) => {
     const product = {img, price, name, documentID}

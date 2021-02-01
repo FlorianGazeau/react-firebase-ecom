@@ -79,7 +79,7 @@ function Header() {
             <ul className='hidden-mobile'>
               {currentUser ? <li><Link to='/account/profil'>Account</Link></li> : <li><Link to='/account/login'>Account</Link></li> }
               <li onClick={handleCart}>Cart <span>({quantity})</span></li>
-              {currentUser && <li><Link onClick={() => auth.signOut()}>LOGOUT</Link></li>}
+              {currentUser && <li onClick={() => auth.signOut()}>LOGOUT</li>}
             </ul>
           </nav>
           <nav className='nav nav-right hidden-fullscreen'>
