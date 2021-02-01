@@ -10,12 +10,20 @@ export const signInUser = ({ email, password }) => async dispatch => {
     
   try {
     await auth.signInWithEmailAndPassword(email, password)
-    dispatch({
-      type: userTypes.SIGN_IN_SUCCESS,
-      payload: true
+    .then(() => {
+      dispatch({
+        type: userTypes.SIGN_IN_SUCCESS,
+        payload: true
+      })
+    })
+    .catch((err) => {
+      dispatch({
+        type: userTypes.SIGN_IN_ERROR,
+        payload: err.message
+      })
     })
   } catch(err) {
-    // setError(err.message)
+
   }
 }
 
@@ -28,8 +36,15 @@ export const signUpUser = ({ displayName, email, password, confirmPassword }) =>
         payload: err
       })
     }
+
+    if (password.length < 7) {
+      const err = "Password is to short"
+      dispatch({
+        type: userTypes.SIGN_UP_ERROR,
+        payload: err
+      })
+    }
     const { user } = await auth.createUserWithEmailAndPassword(email, password)
-    console.log('herrreeee')
     await handleUserProfile(user, { displayName})
 
     dispatch({
@@ -38,7 +53,7 @@ export const signUpUser = ({ displayName, email, password, confirmPassword }) =>
     })
 
   } catch(err) {
-    // console.log(err)
+
   }
 }
 

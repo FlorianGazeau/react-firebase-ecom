@@ -42,8 +42,6 @@ const Signup = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    console.log('fucking')
-
     dispatch(signUpUser({ displayName, email, password }))
   }
 
@@ -51,7 +49,7 @@ const Signup = () => {
     <>
     <p>Please fill in the information below:</p>
     <Form action="" onSubmit={handleSubmit}>
-      {error.length > 0 && <span>{error}</span>}
+      {error.length > 0 && <p className='error'>{error}</p>}
 
       <FormInput
         type='text'
@@ -62,6 +60,7 @@ const Signup = () => {
         required
         handleChange={(e) => setDisplayName(e.target.value)}
         className='form-input'
+        required
       />
       <FormInput
         type='email'
@@ -72,6 +71,7 @@ const Signup = () => {
         required
         handleChange={(e) => setEmail(e.target.value)}
         className='form-input'
+        required
       />
       <FormInput
         type='password'
@@ -82,6 +82,7 @@ const Signup = () => {
         required
         handleChange={(e) => setPassword(e.target.value)}
         className='form-input'
+        required
       />
       <FormInput
         type='password'
@@ -92,6 +93,7 @@ const Signup = () => {
         required
         handleChange={(e) => setConfirmPassword(e.target.value)}
         className='form-input'
+        required
       />
       <Button className='btn btn-submit' type='submit'>
         Sign In

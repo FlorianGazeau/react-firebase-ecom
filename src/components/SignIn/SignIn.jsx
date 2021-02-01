@@ -8,13 +8,14 @@ import { Link } from 'react-router-dom'
 import { signInUser } from '../../redux/Users/user.actions'
 
 const MapSate = ({ user }) => ({
-  signInSuccess: user.signInSuccess
+  signInSuccess: user.signInSuccess,
+  signInError: user.signInError
 })
 
 const Signin = () => {
 
   const dispatch = useDispatch()
-  const { signInSuccess } = useSelector(MapSate)
+  const { signInError, signInSuccess } = useSelector(MapSate)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState([])
@@ -30,6 +31,14 @@ const Signin = () => {
       resetForm()
     }
   }, [signInSuccess]);
+
+  useEffect(() => {
+    console.log('here')
+    if (signInError) {
+      console.log(signInError)
+      setError(signInError)
+    }
+  }, [signInError])
   
   const handleSubmit = async e => {
     e.preventDefault()
@@ -39,7 +48,7 @@ const Signin = () => {
   return (
     <>
       <p>Please enter your e-mail and password:</p>
-      {error.length > 0 && <span>{error}</span>}
+      {error.length > 0 && <p className='error'>{error}</p>}
       <Form onSubmit={handleSubmit}>
         <FormInput 
           type='email'
@@ -48,6 +57,7 @@ const Signin = () => {
           placeholder='Your email'
           handleChange={(e) => setEmail(e.target.value)}
           className='form-input'
+          required
         />
         <FormInput 
           type='password'
@@ -56,6 +66,7 @@ const Signin = () => {
           placeholder='Your password'
           handleChange={(e) => setPassword(e.target.value)}
           className='form-input'
+          required
         />
         <Button type='submit' className='btn btn-submit'>
           Sign up

@@ -11,8 +11,6 @@ const INITIAL_STATE = {
 }
 
 const productReducer = (state=INITIAL_STATE, action) => {
-  const test = Object.values(state.productsAdmin).filter(productsAdmin => productsAdmin.documentID !== action.payload.documentID)
-  console.log(test)
   switch (action.type) {
     // case productsTypes.FETCH_PRODUCTS_BEGIN:
     //   return {
@@ -36,18 +34,6 @@ const productReducer = (state=INITIAL_STATE, action) => {
         ...state,
         product: action.payload.product
       }
-    // case productsTypes.DELETE_PRODUCTS_BEGIN: {
-    //   return {
-    //     ...state
-    //   }
-    // }
-    // case productsTypes.DELETE_PRODUCTS_SUCCESS: {
-    //   return {
-    //     ...state,
-    //     // products: state.productsAdmin.filter(productsAdmin => productsAdmin.documentID !== action.payload)
-    //     products: state.productsAdmin.filter(function (productsAdmin) { return productsAdmin.documentID === action.payload})
-    //   }
-    // }
     case productsTypes.FETCH_PRODUCT_SUCCESS:
       return {
         ...state,

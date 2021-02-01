@@ -3,6 +3,7 @@ import userTypes from  './user.types'
 const INITIAL_STATE = {
   currentUser: null,
   signInSuccess: false,
+  signInError: [],
   signUpSuccess: false,
   signUpError: [],
   resetPasswordSuccess: false,
@@ -10,6 +11,7 @@ const INITIAL_STATE = {
 }
 
 const userReducer = (state=INITIAL_STATE, action) => {
+  console.log(action)
   switch(action.type) {
     case userTypes.SET_CURRENT_USER: 
       return {
@@ -20,6 +22,12 @@ const userReducer = (state=INITIAL_STATE, action) => {
       return {
         ...state,
         signInSuccess: action.payload
+      }
+    case userTypes.SIGN_IN_ERROR:
+      console.log('hey')
+      return {
+        ...state,
+        signInError: action.payload,
       }
     case userTypes.SIGN_UP_SUCCESS:
       return {
