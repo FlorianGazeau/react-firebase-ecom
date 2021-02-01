@@ -12,19 +12,19 @@ const INITIAL_STATE = {
 
 const productReducer = (state=INITIAL_STATE, action) => {
   switch (action.type) {
-    // case productsTypes.FETCH_PRODUCTS_BEGIN:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //     error: null
-    //   }
-    // case productsTypes.FETCH_PRODUCTS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     products: action.payload.data,
-    //     queryDoc: action.payload.queryDoc
-    //   }
+    case productsTypes.FETCH_PRODUCTS_BEGIN:
+      return {
+        ...state,
+        loading: true,
+        error: null
+      }
+    case productsTypes.FETCH_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        products: action.payload.data,
+        queryDoc: action.payload.queryDoc
+      }
     case productsTypes.ADD_NEW_PRODUCTS_BEGIN: 
       return {
         ...state,

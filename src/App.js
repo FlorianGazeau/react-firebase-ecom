@@ -22,6 +22,7 @@ import Admin from './pages/Admin/Admin';
 import { CheckAdminUser } from './utils/CheckAdminUser';
 import Search from './pages/Search/Search';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
+import WorkInProgress from './components/WorkInProgress/WorkInProgress';
 
 const App = props => {
   const { setCurrentUser, currentUser } = props
@@ -50,6 +51,8 @@ const App = props => {
     <Router>
       <Header />
       <Switch>
+        <Route path='/faq' component={WorkInProgress} />
+        <Route path='/about' component={WorkInProgress} />
         <Route exact path='/' component={Homepage} />
         <Route exact path='/shop' component={Search} />
         <Route path='/product/:productID' component={ProductDetails} />
@@ -61,7 +64,7 @@ const App = props => {
           {currentUser && CheckAdminUser(currentUser) ? <Admin /> : <Redirect to='/'></Redirect>}
         </Route>
         <WithAuth>
-          <Route path='/account/profil' component={Dashboard} />
+          <Route path='/account/profil' component={WorkInProgress} />
         </WithAuth>
       </Switch>
     </Router>

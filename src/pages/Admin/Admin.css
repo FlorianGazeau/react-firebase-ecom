@@ -5,7 +5,7 @@
 .flex-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .flex-grid > .card-product {
@@ -15,11 +15,6 @@
 .admin-nav {
   display: flex;
   align-items: center;
-  /* padding: 20px; */
-}
-
-.admin-nav h4 {
-  /* margin-right: 1em; */
 }
 
 .admin-title {
@@ -36,7 +31,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  /* margin: 0 20px; */
+}
+
+@media screen and (min-width: 780px) {
+  .flex-grid {
+    justify-content: flex-start;
+  }
 }
 
 @media screen and (min-width: 900px) {

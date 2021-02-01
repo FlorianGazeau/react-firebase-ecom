@@ -51,7 +51,7 @@ const Cart = (props) => {
             const { img, price, name, quantity, documentID } = data
 
             return (
-                <div className="cart-item">
+                <div className="cart-item" key={i}>
                   <div className="cart-thumbnail">
                     <img src={img} alt={name}/>
                   </div>

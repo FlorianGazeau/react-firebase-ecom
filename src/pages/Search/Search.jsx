@@ -16,7 +16,7 @@ const Search = () => {
   const dispatch = useDispatch()
   const [filterType, setFilterType] = useState('');
   const { products } = useSelector(MapState)
-  const { data, queryDoc } = products
+  const { data, queryDoc, isLast } = products
   
   useEffect(() => {
     dispatch(fetchProducts({ filterType }))
@@ -28,7 +28,6 @@ const Search = () => {
   }
   
   const handleLoadMore = () => {
-    console.log(queryDoc)
     dispatch(
       fetchProducts({ 
         filterType, 
@@ -38,6 +37,7 @@ const Search = () => {
     )
   }
 
+
   const configLoadMore = {
     onLoadMoreEvt: handleLoadMore,
   }
@@ -45,7 +45,7 @@ const Search = () => {
   if (data && data.length < 1) {
     return (
       <div className='searchPage'>
-        <div className='searchpage__wrapper'>
+        <div className='wrapper'>
           <div className='select'>
             <select name="slct" id="slct"  onChange={handleFilter}>
               <option value="">Show All</option>
@@ -53,7 +53,7 @@ const Search = () => {
               <option value="womens">Womens</option>
             </select>
           </div>
-          <div className='products-result'>
+          <div className='flex-grid'>
             <h2>No search result</h2>
           </div>
         </div>
@@ -62,7 +62,7 @@ const Search = () => {
   }
   return (
     <div className='searchPage'>
-      <div className="searchpage__wrapper">
+      <div className="wrapper">
         <div className='select'>
           <select name="slct" id="slct"  onChange={handleFilter}>
             <option value="">Show All</option>
@@ -70,7 +70,7 @@ const Search = () => {
             <option value="womens">Womens</option>
           </select>
         </div>
-        <animated.div className='products-result' style={animation}>
+        <animated.div className='flex-grid' style={animation}>
           {data && data.map((data, i) => {
             const { img, price, name, documentID } = data
 
@@ -87,7 +87,9 @@ const Search = () => {
           })}
 
         </animated.div>
+        {!isLast && (
         <LoadMore {...configLoadMore} />
+        )}
       </div>
     </div>
   );

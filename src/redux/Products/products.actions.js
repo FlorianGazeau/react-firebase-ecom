@@ -62,7 +62,7 @@ export function fetchProducts({ filterType, startAfterDoc, persitProducts=[] }) 
             queryDoc: snapshot.docs[totalCount - 1],
             isLast: totalCount < 1
           })
-          dispatch(fetchProductsSuccess({data, queryDoc: snapshot.docs[totalCount - 1]}))
+          dispatch(fetchProductsSuccess({data, queryDoc: snapshot.docs[totalCount - 1], isLast: totalCount <1}))
         })
         .catch((err) => {
           reject(err)
