@@ -63,12 +63,14 @@ const Search = () => {
   return (
     <div className='searchPage'>
       <div className="wrapper">
-        <div className='select'>
-          <select name="slct" id="slct"  onChange={handleFilter}>
-            <option value="">Show All</option>
-            <option value="mens">Mens</option>
-            <option value="womens">Womens</option>
-          </select>
+        <div>
+          <div className='select'>
+            <select name="slct" id="slct"  onChange={handleFilter}>
+              <option value="">Show All</option>
+              <option value="mens">Mens</option>
+              <option value="womens">Womens</option>
+            </select>
+          </div>
         </div>
         <animated.div className='flex-grid' style={animation}>
           {data && data.map((data, i) => {

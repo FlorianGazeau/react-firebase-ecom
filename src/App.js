@@ -17,7 +17,6 @@ import Header from "./components/Header/Header";
 import Homepage from "./pages/Homepage/Homepage";
 import Authentification from "./pages/Authentification/Authentification";
 import Recovery from './pages/Recovery/Recovery';
-import Dashboard from './pages/Dashboard/Dashboard'
 import Admin from './pages/Admin/Admin';
 import { CheckAdminUser } from './utils/CheckAdminUser';
 import Search from './pages/Search/Search';
