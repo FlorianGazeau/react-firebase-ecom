@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Button from '../../components/Form/Button/Button'
 // import SignIn from '../../components/Signin/Signin'
 // import SignUp from '../../components/Signup/Signup'
-import SignIn  from '../../components/Signin/Signin'
-import SignUp from '../../components/Signup/Signup'
+import Signin  from '../../components/Signin/Signin'
+import Signup from '../../components/Signup/Signup'
 import { signInWithGoogle } from '../../Firebase/utils'
 import './Authentification.css'
 
@@ -19,7 +19,7 @@ const Authentification = props => {
           <h4 onClick={() => setToggle('signin')}>Login</h4>
         </div>
         <div className="registration-body">
-          {toggle === 'signin' ? <SignIn /> : <SignUp />}
+          {toggle === 'signin' ? <Signin /> : <Signup />}
         </div>
         <div className="registration-footer">
           <Button onClick={signInWithGoogle} className='btn btn-google'>
